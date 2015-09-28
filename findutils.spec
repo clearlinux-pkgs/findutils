@@ -4,7 +4,7 @@
 #
 Name     : findutils
 Version  : 4.4.2
-Release  : 9
+Release  : 10
 URL      : http://ftp.gnu.org/gnu/findutils/findutils-4.4.2.tar.gz
 Source0  : http://ftp.gnu.org/gnu/findutils/findutils-4.4.2.tar.gz
 Summary  : No detailed summary available
