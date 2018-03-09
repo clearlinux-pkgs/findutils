@@ -4,12 +4,12 @@
 #
 Name     : findutils
 Version  : 4.6.0
-Release  : 16
-URL      : http://ftp.gnu.org/gnu/findutils/findutils-4.6.0.tar.gz
-Source0  : http://ftp.gnu.org/gnu/findutils/findutils-4.6.0.tar.gz
+Release  : 17
+URL      : https://mirrors.kernel.org/gnu/findutils/findutils-4.6.0.tar.gz
+Source0  : https://mirrors.kernel.org/gnu/findutils/findutils-4.6.0.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
-License  : GFDL-1.3 GPL-3.0 GPL-3.0+
+License  : GPL-3.0 GPL-3.0+
 Requires: findutils-bin
 Requires: findutils-doc
 Requires: findutils-locales
@@ -52,16 +52,23 @@ locales components for the findutils package.
 %setup -q -n findutils-4.6.0
 
 %build
-%configure --disable-static
-make V=1  %{?_smp_mflags}
-
-%check
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost
+export no_proxy=localhost,127.0.0.1,0.0.0.0
+export LANG=C
+export SOURCE_DATE_EPOCH=1520621474
+%configure --disable-static
+make  %{?_smp_mflags}
+
+%check
+export LANG=C
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
+export SOURCE_DATE_EPOCH=1520621474
 rm -rf %{buildroot}
 %make_install
 %find_lang findutils
@@ -85,6 +92,6 @@ rm -rf %{buildroot}
 %doc /usr/share/man/man1/*
 %doc /usr/share/man/man5/*
 
-%files locales -f findutils.lang 
+%files locales -f findutils.lang
 %defattr(-,root,root,-)
 

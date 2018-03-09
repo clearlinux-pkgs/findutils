@@ -1,0 +1,61 @@
+Configure miss: whether debug output should be produced
+Configure miss: fpurge
+Configure miss: __freadahead
+Configure miss: mbslen
+Configure miss: selinux/selinux.h usability
+Configure miss: selinux/selinux.h presence
+Configure miss: selinux/selinux.h
+Configure miss: priv.h usability
+Configure miss: priv.h presence
+Configure miss: priv.h
+Configure miss: st_dm_mode in struct stat
+Configure miss: whether strmode is declared
+Configure miss: whether fflush works on input streams
+Configure miss: strerror_r with POSIX signature
+Configure miss: library containing setfilecon
+Configure miss: whether fpurge is declared
+Configure miss: _fseeki64
+Configure miss: whether getcwd aborts when 4k < cwd_length < 16k
+Configure miss: whether mbswidth is declared in <wchar.h>
+Configure miss: __mktime_internal
+Configure miss: listmntent
+Configure miss: sys/fs_types.h usability
+Configure miss: sys/fs_types.h presence
+Configure miss: sys/fs_types.h
+Configure miss: struct fsstat.f_fstypename
+Configure miss: listmntent of Cray/Unicos-9
+Configure miss: mntctl function and struct vmount
+Configure miss: sys/mntent.h usability
+Configure miss: sys/mntent.h presence
+Configure miss: sys/mntent.h
+Configure miss: selinux/flask.h usability
+Configure miss: selinux/flask.h presence
+Configure miss: selinux/flask.h
+Configure miss: timezone_t
+Configure miss: a turkish Unicode locale
+Configure miss: ioctl with POSIX signature
+Configure miss: working nanosleep
+Configure miss: getppriv
+Configure miss: sys/mnttab.h usability
+Configure miss: sys/mnttab.h presence
+Configure miss: sys/mnttab.h
+Configure miss: sys/mntio.h usability
+Configure miss: sys/mntio.h presence
+Configure miss: sys/mntio.h
+Configure miss: forcefindlib
+Configure miss: python
+Configure miss: python2
+Configure miss: python3
+Configure miss: python3.3
+Configure miss: python3.2
+Configure miss: python3.1
+Configure miss: python3.0
+Configure miss: python2.7
+Configure miss: python2.6
+Configure miss: python2.5
+Configure miss: python2.4
+Configure miss: python2.3
+Configure miss: python2.2
+Configure miss: python2.1
+Configure miss: python2.0
+Configure miss: faketime
