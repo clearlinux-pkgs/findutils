@@ -4,7 +4,7 @@
 #
 Name     : findutils
 Version  : 4.6.0
-Release  : 17
+Release  : 18
 URL      : https://mirrors.kernel.org/gnu/findutils/findutils-4.6.0.tar.gz
 Source0  : https://mirrors.kernel.org/gnu/findutils/findutils-4.6.0.tar.gz
 Summary  : No detailed summary available
