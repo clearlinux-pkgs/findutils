@@ -1,0 +1,9 @@
+# Use the ones from mlocate
+/usr/bin/locate
+/usr/bin/updatedb
+/usr/libexec/bigram
+/usr/libexec/code
+/usr/libexec/frcode
+/usr/share/man/man1/locate.1
+/usr/share/man/man1/updatedb.1
+/usr/share/man/man5/locatedb.5
