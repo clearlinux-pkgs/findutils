@@ -4,18 +4,24 @@
 #
 Name     : findutils
 Version  : 4.6.0
-Release  : 19
+Release  : 20
 URL      : https://mirrors.kernel.org/gnu/findutils/findutils-4.6.0.tar.gz
 Source0  : https://mirrors.kernel.org/gnu/findutils/findutils-4.6.0.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-3.0 GPL-3.0+
-Requires: findutils-bin
-Requires: findutils-doc
-Requires: findutils-locales
+Requires: findutils-bin = %{version}-%{release}
+Requires: findutils-libexec = %{version}-%{release}
+Requires: findutils-license = %{version}-%{release}
+Requires: findutils-locales = %{version}-%{release}
+Requires: findutils-man = %{version}-%{release}
 BuildRequires : dejagnu
 BuildRequires : expect
+BuildRequires : glibc-locale
 BuildRequires : tcl
+Patch1: findutils-4.6.0-exec-args.patch
+Patch2: findutils-4.6.0-gnulib-fflush.patch
+Patch3: findutils-4.6.0-gnulib-makedev.patch
 
 %description
 This package contains the GNU find, xargs, and locate programs.  find
@@ -27,6 +33,8 @@ options, some borrowed from Unix and some unique to GNU.
 %package bin
 Summary: bin components for the findutils package.
 Group: Binaries
+Requires: findutils-libexec = %{version}-%{release}
+Requires: findutils-license = %{version}-%{release}
 
 %description bin
 bin components for the findutils package.
@@ -35,9 +43,27 @@ bin components for the findutils package.
 %package doc
 Summary: doc components for the findutils package.
 Group: Documentation
+Requires: findutils-man = %{version}-%{release}
 
 %description doc
 doc components for the findutils package.
+
+
+%package libexec
+Summary: libexec components for the findutils package.
+Group: Default
+Requires: findutils-license = %{version}-%{release}
+
+%description libexec
+libexec components for the findutils package.
+
+
+%package license
+Summary: license components for the findutils package.
+Group: Default
+
+%description license
+license components for the findutils package.
 
 
 %package locales
@@ -48,28 +74,46 @@ Group: Default
 locales components for the findutils package.
 
 
+%package man
+Summary: man components for the findutils package.
+Group: Default
+
+%description man
+man components for the findutils package.
+
+
 %prep
 %setup -q -n findutils-4.6.0
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1520621474
-%configure --disable-static
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1563292430
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
+%reconfigure --disable-static
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1520621474
+export SOURCE_DATE_EPOCH=1563292430
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/findutils
+cp COPYING %{buildroot}/usr/share/package-licenses/findutils/COPYING
 %make_install
 %find_lang findutils
 
@@ -82,15 +126,28 @@ rm -rf %{buildroot}
 /usr/bin/locate
 /usr/bin/updatedb
 /usr/bin/xargs
+
+%files doc
+%defattr(0644,root,root,0755)
+%doc /usr/share/info/*
+
+%files libexec
+%defattr(-,root,root,-)
 /usr/libexec/bigram
 /usr/libexec/code
 /usr/libexec/frcode
 
-%files doc
-%defattr(-,root,root,-)
-%doc /usr/share/info/*
-%doc /usr/share/man/man1/*
-%doc /usr/share/man/man5/*
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/findutils/COPYING
+
+%files man
+%defattr(0644,root,root,0755)
+/usr/share/man/man1/find.1
+/usr/share/man/man1/locate.1
+/usr/share/man/man1/updatedb.1
+/usr/share/man/man1/xargs.1
+/usr/share/man/man5/locatedb.5
 
 %files locales -f findutils.lang
 %defattr(-,root,root,-)
