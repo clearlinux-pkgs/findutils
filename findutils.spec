@@ -4,14 +4,13 @@
 #
 Name     : findutils
 Version  : 4.6.0
-Release  : 20
+Release  : 21
 URL      : https://mirrors.kernel.org/gnu/findutils/findutils-4.6.0.tar.gz
 Source0  : https://mirrors.kernel.org/gnu/findutils/findutils-4.6.0.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-3.0 GPL-3.0+
 Requires: findutils-bin = %{version}-%{release}
-Requires: findutils-libexec = %{version}-%{release}
 Requires: findutils-license = %{version}-%{release}
 Requires: findutils-locales = %{version}-%{release}
 Requires: findutils-man = %{version}-%{release}
@@ -33,7 +32,6 @@ options, some borrowed from Unix and some unique to GNU.
 %package bin
 Summary: bin components for the findutils package.
 Group: Binaries
-Requires: findutils-libexec = %{version}-%{release}
 Requires: findutils-license = %{version}-%{release}
 
 %description bin
@@ -47,15 +45,6 @@ Requires: findutils-man = %{version}-%{release}
 
 %description doc
 doc components for the findutils package.
-
-
-%package libexec
-Summary: libexec components for the findutils package.
-Group: Default
-Requires: findutils-license = %{version}-%{release}
-
-%description libexec
-libexec components for the findutils package.
 
 
 %package license
@@ -93,7 +82,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1563294449
+export SOURCE_DATE_EPOCH=1564447549
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
@@ -110,20 +99,27 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1563294449
+export SOURCE_DATE_EPOCH=1564447549
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/findutils
 cp COPYING %{buildroot}/usr/share/package-licenses/findutils/COPYING
 %make_install
 %find_lang findutils
+## Remove excluded files
+rm -f %{buildroot}/usr/bin/locate
+rm -f %{buildroot}/usr/bin/updatedb
+rm -f %{buildroot}/usr/libexec/bigram
+rm -f %{buildroot}/usr/libexec/code
+rm -f %{buildroot}/usr/libexec/frcode
+rm -f %{buildroot}/usr/share/man/man1/locate.1
+rm -f %{buildroot}/usr/share/man/man1/updatedb.1
+rm -f %{buildroot}/usr/share/man/man5/locatedb.5
 
 %files
 %defattr(-,root,root,-)
 
 %files bin
 %defattr(-,root,root,-)
-%exclude /usr/bin/locate
-%exclude /usr/bin/updatedb
 /usr/bin/find
 /usr/bin/xargs
 
@@ -131,21 +127,12 @@ cp COPYING %{buildroot}/usr/share/package-licenses/findutils/COPYING
 %defattr(0644,root,root,0755)
 %doc /usr/share/info/*
 
-%files libexec
-%defattr(-,root,root,-)
-%exclude /usr/libexec/bigram
-%exclude /usr/libexec/code
-%exclude /usr/libexec/frcode
-
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/findutils/COPYING
 
 %files man
 %defattr(0644,root,root,0755)
-%exclude /usr/share/man/man1/locate.1
-%exclude /usr/share/man/man1/updatedb.1
-%exclude /usr/share/man/man5/locatedb.5
 /usr/share/man/man1/find.1
 /usr/share/man/man1/xargs.1
 
