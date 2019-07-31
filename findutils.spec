@@ -47,6 +47,14 @@ Requires: findutils-man = %{version}-%{release}
 doc components for the findutils package.
 
 
+%package libexec
+Summary: libexec components for the findutils package.
+Group: Default
+
+%description libexec
+libexec components for the findutils package.
+
+
 %package license
 Summary: license components for the findutils package.
 Group: Default
@@ -129,6 +137,9 @@ rm -f %{buildroot}/usr/share/man/man5/locatedb.5
 %files doc
 %defattr(0644,root,root,0755)
 %doc /usr/share/info/*
+
+%files libexec
+%defattr(-,root,root,-)
 
 %files license
 %defattr(0644,root,root,0755)
