@@ -6,7 +6,7 @@
 #
 Name     : findutils
 Version  : 4.7.0
-Release  : 24
+Release  : 25
 URL      : https://mirrors.kernel.org/gnu/findutils/findutils-4.7.0.tar.xz
 Source0  : https://mirrors.kernel.org/gnu/findutils/findutils-4.7.0.tar.xz
 Source1 : https://mirrors.kernel.org/gnu/findutils/findutils-4.7.0.tar.xz.sig
@@ -14,6 +14,7 @@ Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-3.0 GPL-3.0+
 Requires: findutils-bin = %{version}-%{release}
+Requires: findutils-info = %{version}-%{release}
 Requires: findutils-license = %{version}-%{release}
 Requires: findutils-locales = %{version}-%{release}
 Requires: findutils-man = %{version}-%{release}
@@ -38,13 +39,12 @@ Requires: findutils-license = %{version}-%{release}
 bin components for the findutils package.
 
 
-%package doc
-Summary: doc components for the findutils package.
-Group: Documentation
-Requires: findutils-man = %{version}-%{release}
+%package info
+Summary: info components for the findutils package.
+Group: Default
 
-%description doc
-doc components for the findutils package.
+%description info
+info components for the findutils package.
 
 
 %package license
@@ -73,14 +73,14 @@ man components for the findutils package.
 
 %prep
 %setup -q -n findutils-4.7.0
+cd %{_builddir}/findutils-4.7.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1567182334
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1573769795
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -100,10 +100,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1567182334
+export SOURCE_DATE_EPOCH=1573769795
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/findutils
-cp COPYING %{buildroot}/usr/share/package-licenses/findutils/COPYING
+cp %{_builddir}/findutils-4.7.0/COPYING %{buildroot}/usr/share/package-licenses/findutils/31a3d460bb3c7d98845187c716a30db81c44b615
 %make_install
 %find_lang findutils
 ## Remove excluded files
@@ -124,13 +124,16 @@ rm -f %{buildroot}/usr/share/man/man5/locatedb.5
 /usr/bin/find
 /usr/bin/xargs
 
-%files doc
+%files info
 %defattr(0644,root,root,0755)
-%doc /usr/share/info/*
+/usr/share/info/find-maint.info
+/usr/share/info/find.info
+/usr/share/info/find.info-1
+/usr/share/info/find.info-2
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/findutils/COPYING
+/usr/share/package-licenses/findutils/31a3d460bb3c7d98845187c716a30db81c44b615
 
 %files man
 %defattr(0644,root,root,0755)
