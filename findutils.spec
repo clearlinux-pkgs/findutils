@@ -6,10 +6,10 @@
 #
 Name     : findutils
 Version  : 4.7.0
-Release  : 25
+Release  : 26
 URL      : https://mirrors.kernel.org/gnu/findutils/findutils-4.7.0.tar.xz
 Source0  : https://mirrors.kernel.org/gnu/findutils/findutils-4.7.0.tar.xz
-Source1 : https://mirrors.kernel.org/gnu/findutils/findutils-4.7.0.tar.xz.sig
+Source1  : https://mirrors.kernel.org/gnu/findutils/findutils-4.7.0.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-3.0 GPL-3.0+
@@ -80,14 +80,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1573769795
+export SOURCE_DATE_EPOCH=1605126852
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %reconfigure --disable-static
 make  %{?_smp_mflags}
@@ -97,10 +97,10 @@ export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1573769795
+export SOURCE_DATE_EPOCH=1605126852
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/findutils
 cp %{_builddir}/findutils-4.7.0/COPYING %{buildroot}/usr/share/package-licenses/findutils/31a3d460bb3c7d98845187c716a30db81c44b615
