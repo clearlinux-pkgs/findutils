@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x46502EF796917195 (mail@bernhard-voelker.de)
 #
 Name     : findutils
-Version  : 4.7.0
-Release  : 26
-URL      : https://mirrors.kernel.org/gnu/findutils/findutils-4.7.0.tar.xz
-Source0  : https://mirrors.kernel.org/gnu/findutils/findutils-4.7.0.tar.xz
-Source1  : https://mirrors.kernel.org/gnu/findutils/findutils-4.7.0.tar.xz.sig
+Version  : 4.8.0
+Release  : 27
+URL      : https://mirrors.kernel.org/gnu/findutils/findutils-4.8.0.tar.xz
+Source0  : https://mirrors.kernel.org/gnu/findutils/findutils-4.8.0.tar.xz
+Source1  : https://mirrors.kernel.org/gnu/findutils/findutils-4.8.0.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-3.0 GPL-3.0+
@@ -18,6 +18,7 @@ Requires: findutils-info = %{version}-%{release}
 Requires: findutils-license = %{version}-%{release}
 Requires: findutils-locales = %{version}-%{release}
 Requires: findutils-man = %{version}-%{release}
+BuildRequires : bison
 BuildRequires : dejagnu
 BuildRequires : expect
 BuildRequires : glibc-locale
@@ -72,15 +73,15 @@ man components for the findutils package.
 
 
 %prep
-%setup -q -n findutils-4.7.0
-cd %{_builddir}/findutils-4.7.0
+%setup -q -n findutils-4.8.0
+cd %{_builddir}/findutils-4.8.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1605126852
+export SOURCE_DATE_EPOCH=1610300567
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -100,10 +101,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1605126852
+export SOURCE_DATE_EPOCH=1610300567
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/findutils
-cp %{_builddir}/findutils-4.7.0/COPYING %{buildroot}/usr/share/package-licenses/findutils/31a3d460bb3c7d98845187c716a30db81c44b615
+cp %{_builddir}/findutils-4.8.0/COPYING %{buildroot}/usr/share/package-licenses/findutils/31a3d460bb3c7d98845187c716a30db81c44b615
 %make_install
 %find_lang findutils
 ## Remove excluded files
