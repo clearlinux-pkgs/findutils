@@ -1,7 +1,4 @@
-#
-# This file contains banned pkgconfig build requirements that get picked up but are 
-# undesireable desirable. One name per line, no whitespace.
-#
-# There is one Python file in tests/, but it's not used to run the test suite...
+# This file contains build requirements that get picked up but are
+# undesirable. One entry per line, no whitespace.
 python
 python3-dev
